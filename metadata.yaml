@@ -1,0 +1,32 @@
+_repo: Dream-Life-and-Real-Life--A-Little-African-Story_1458
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Schreiner, Olive
+    alias: Iron, Ralph
+    birthdate: 1855
+    deathdate: 1920
+    gutenberg_agent_id: '632'
+    url: http://www.gutenberg.org/2009/agents/632
+    wikipedia: http://en.wikipedia.org/wiki/Olive_Schreiner
+description: Dream life and real life; a little African story.- The woman's rose.
+  the policy in favour of protection.
+gutenberg_bookshelf: Africa
+gutenberg_issued: '1998-09-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '1458'
+language: en
+publication_note: '1893'
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcc 'PR'
+- !lcsh 'Short stories'
+- !lcsh 'Fiction'
+- GITenberg
+tableOfContents: "Dream life and real life; a little African story\r\nThe woman's\
+  \ rose\r\n\"The policy in favour of protection-\"."
+title: 'Dream Life and Real Life: A Little African Story'
+url: http://www.gutenberg.org/ebooks/1458
