@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: tdPCHlDtJMHWePL7hQKu5IVmOfgMZSARRYEvWTKmQUOE58JGBRZIBwhLSl8K6vuIfbi9YOkCU/qrk81yZYxBDO48rj+crdA+HbqPhTzzHS0Qo0612yrueS1dIEEd/hQy5ik2wa66UH3Pz8xld3Z4VGy0MM3BKtAac7viI8/mAtHrDLPqBvWXXXKwlz1Zl4gsdn/mrrnuyJvhKwBvJSVbuWedw/WrwDcOzWqPt/cv8aw4ibbAhefJbB7R9FILs9eF+YaUWv+MsqKPeJuE1cBna9LRo7eAyzvHJ8+Z0vLAeDOeaAWqJ6LmLGGMPwEV7AWLqF0aaDAqisQ8yw5DsL10nq2CS0t69bJr7iBNNf/f41rSm1yUct4isq8p9A/rUswSgzAnMKngDmJWsP9FYVhv3nWpbvCcpb1x0Fhj/yhyuBYtjgjvajQl7GWJynZNH893KnN7KMJ3N7i/5IH7oSssw4mxIhChGg9voRPSdZhjY7H+i2lvQS2686JPGckFzGUM00oXMBhCDFSUJuwtOg+CHQ7xjtGWis6HwvQCfoF1xQZxSTlGABBaljvXH5MqVQ55nQmuhwCMhlfaEvo+zC0o/+pCNM4977l8cebl6sjtKGAYjctHAtG5I4dF5yYvPubAaiT6R14Ap4mERCDJs3FFuKLg0+cDvjrH/MQCWaBjop4=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Dream-Life-and-Real-Life--A-Little-African-Story_1458
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
